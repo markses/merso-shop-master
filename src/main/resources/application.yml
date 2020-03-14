@@ -1,0 +1,28 @@
+server:
+  port: 8099
+
+spring:
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/merso?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    jpa:
+      show-sql: true
+      hibernate:
+        use-new-id-generator-mappings: false
+        ddl-auto: update
+  mail:
+    host: smtp.qq.com
+    username: 2508124276@qq.com
+    password: orivwrolyhomdhjd
+    properties.mail.smtp:
+      auth: true
+      starttls:
+        enable: true
+        required: true
+  logging.level.org.springframework.boot.autoconfigure: ERROR
