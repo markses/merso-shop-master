@@ -2,6 +2,7 @@ package org.merso.mersoshop.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -100,9 +101,23 @@ public class UserController {
 //     model.addAttribute("msg","用户名不存在！");
       return ResponseDataUtil.failure("账户错误");
 
+    }catch (IncorrectCredentialsException e) {
+      //密码错误 ，登录失败
+      //model.addAttribute("msg", "密码错误");
+      return ResponseDataUtil.failure(110,"密码错误");
     }
 
 
+
   }
+
+  //用户退出
+  @RequestMapping("/logout")
+  public String logout(){
+    Subject subject = SecurityUtils.getSubject();
+    subject.logout();
+    return "logout";
+  }
+
 
 }
