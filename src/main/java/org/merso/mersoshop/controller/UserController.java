@@ -6,6 +6,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.merso.mersoshop.entity.LoginState;
 import org.merso.mersoshop.entity.User;
 import org.merso.mersoshop.result.ResponseData;
 import org.merso.mersoshop.result.ResponseDataUtil;
@@ -77,7 +78,7 @@ public class UserController {
 //用户登录
   @RequestMapping("/login")
   @ResponseBody
-  public ResponseData login(@RequestBody User user, Model model){
+  public ResponseData login(@RequestBody User user, Model model,HttpSession session){
     /**
      * 使用shrio编写认证操作
      *
@@ -94,6 +95,10 @@ public class UserController {
     //3.执行登录方法
     try {
       subject.login(token);
+      LoginState loginState = new LoginState();
+     loginState.setIsLogin(false);
+     loginState.setUsername(user.getUsername());
+     session.setAttribute("loginState",loginState);
     return ResponseDataUtil.success("登录成功");
 //      model.addAttribute("msg","登录成功");
     }
@@ -108,6 +113,18 @@ public class UserController {
     }
 
 
+
+  }
+
+  //判断用户登录状态
+  @RequestMapping(value = "/init", method = RequestMethod.GET)
+  @ResponseBody
+  public LoginState ifUserLogin(HttpSession session) {
+    LoginState loginState;
+    loginState = (LoginState)session.getAttribute("loginState");
+    if (loginState == null)
+      loginState = new LoginState();
+    return loginState;
 
   }
 
