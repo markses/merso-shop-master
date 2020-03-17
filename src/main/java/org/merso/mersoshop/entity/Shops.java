@@ -11,19 +11,19 @@ public class Shops {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//解决了表不存在的问题
     @Id
     @Column(length = 50)
-    private int Sid;
+    private int sid;
     @Column(length = 255)
-    private String Sname;
+    private String sname;
     @Column(length = 50)
-    private Float Sprice;
+    private Float sprice;
     @Column(length = 255)
-    private String Surl;
+    private String surl;
     //    private String name;
 //    private String code;
 //    private Boolean allowed;
 //    private Boolean isManager;
     @Column(length = 50)
-    private int Stock;
+    private int stock;
     @Column(length = 1000)
-    private String Sdetails;
+    private String sdetails;
 }
