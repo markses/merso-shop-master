@@ -99,6 +99,7 @@ public class UserController {
      loginState.setIsLogin(false);
      loginState.setUsername(user.getUsername());
      session.setAttribute("loginState",loginState);
+     System.out.println(session.getAttribute("loginState"));
     return ResponseDataUtil.success("登录成功");
 //      model.addAttribute("msg","登录成功");
     }
@@ -122,9 +123,12 @@ public class UserController {
   public LoginState ifUserLogin(HttpSession session) {
     LoginState loginState;
     loginState = (LoginState)session.getAttribute("loginState");
+    System.out.println(session.getAttribute("loginState"));
     if (loginState == null)
       loginState = new LoginState();
+
     return loginState;
+
 
   }
 
