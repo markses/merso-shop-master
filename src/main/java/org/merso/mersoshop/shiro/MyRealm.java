@@ -42,7 +42,7 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
 
-        User user = userRepository.findByUsername(token.getUsername());
+        User user = userRepository.findByAccount(token.getUsername());
 
         //验证账户信息
         if (user == null) {

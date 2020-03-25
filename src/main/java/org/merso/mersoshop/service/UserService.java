@@ -1,5 +1,6 @@
 package org.merso.mersoshop.service;
 
+import org.merso.mersoshop.entity.Order;
 import org.merso.mersoshop.entity.User;
 import org.merso.mersoshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,12 @@ public class UserService {
     private UserRepository userRepository;
 
     public void insertUser(User user) {
-        System.out.println(user.getUsername());
-        userRepository.save(user);
+        User user1 = new User();
+        user1.setAccount(user.getAccount());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(user.getPassword());
+        user1.setEmail(user.getEmail());
+        userRepository.save(user1);
         System.out.println("ok");
 
     }
@@ -28,5 +33,11 @@ public class UserService {
                 return false;
             }
 
+    }
+
+    //返回用户名
+    public String getUsername(String account) {
+        String username = userRepository.getUsername(account);
+        return username;
     }
 }

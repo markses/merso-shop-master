@@ -23,14 +23,14 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Test
-    public void testFindByAccount() {
-        User userDO = userRepository.findByUsername("merso1");
-        if (userDO != null) {
-            System.out.println("name = " + userDO.getUsername());
-            System.out.println("account = " + userDO.getPassword());
-        }
-    }
+//    @Test
+//    public void testFindByAccount() {
+//        User userDO = userRepository.findByUsername("merso1");
+//        if (userDO != null) {
+//            System.out.println("name = " + userDO.getUsername());
+//            System.out.println("account = " + userDO.getPassword());
+//        }
+//    }
 
     @Autowired
     private EmailService emailService;

@@ -33,12 +33,8 @@ public class UserController {
   @ResponseBody
   public ResponseData registered(@RequestBody User user, HttpSession session) {
     ResponseData responseData = new ResponseData();
-
     String code = (String)session.getAttribute("code");
     String email = (String)session.getAttribute("email");
-    System.out.println(code);
-
-
     if (code != null && code.equals(user.getCode())&& email.equals(user.getEmail()) ) {
 
       userService.insertUser(user);
@@ -49,10 +45,6 @@ public class UserController {
       responseData.setMsg("验证码错误");
       return responseData;
     }
-//    else {
-//      responseData.setMsg("请检查网络连接");
-//      return responseData;
-//    }
     return responseData;
   }
 
@@ -60,18 +52,12 @@ public class UserController {
   @RequestMapping(value = "/email",method = RequestMethod.GET)
   @ResponseBody
   public String judgeEmail(@RequestParam("email") String email, HttpSession session) {
-    //session.setMaxInactiveInterval(100);
     if (userService.findByEmail(email))
       return "邮箱已经注册";
-
-      //return emailService.sendEmail(email);
-    String code = emailService.sendEmail(email);
+       String code = emailService.sendEmail(email);
        session.setAttribute("email",email);
        session.setAttribute("code",code);
-       System.out.println(session.getAttribute("code"));
-    System.out.println(session.getAttribute("email"));
-
-    return "邮箱验证成功";
+        return "邮箱验证成功";
 
   }
 
@@ -85,31 +71,30 @@ public class UserController {
      */
 
     //1.获取subjec
-    System.out.println(user.getUsername()+user.getPassword());
+
     Subject subject = SecurityUtils.getSubject();
 
     //2.封装用户数据
-    UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
-    System.out.println(token);
+    UsernamePasswordToken token = new UsernamePasswordToken(user.getAccount(),user.getPassword());
+
 
     //3.执行登录方法
     try {
       subject.login(token);
       LoginState loginState = new LoginState();
+      loginState.setUsername(userService.getUsername(user.getAccount()));
      loginState.setIsLogin(false);
-     loginState.setUsername(user.getUsername());
+     loginState.setAccount(user.getAccount());
      session.setAttribute("loginState",loginState);
-     System.out.println(session.getAttribute("loginState"));
     return ResponseDataUtil.success("登录成功");
-//      model.addAttribute("msg","登录成功");
+
     }
     catch (UnknownAccountException e){
-//     model.addAttribute("msg","用户名不存在！");
+
       return ResponseDataUtil.failure("账户错误");
 
     }catch (IncorrectCredentialsException e) {
-      //密码错误 ，登录失败
-      //model.addAttribute("msg", "密码错误");
+
       return ResponseDataUtil.failure(110,"密码错误");
     }
 
