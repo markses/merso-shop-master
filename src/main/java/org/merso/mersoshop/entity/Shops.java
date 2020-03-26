@@ -1,9 +1,11 @@
 package org.merso.mersoshop.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javafx.scene.transform.Scale;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Entity
@@ -17,6 +19,7 @@ public class Shops {
     private String sku_name;
     private String sku_details;
     private int stock;
+    private String sku_url;
     private Float price;
 
     @JsonIgnore

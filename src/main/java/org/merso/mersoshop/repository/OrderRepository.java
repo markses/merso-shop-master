@@ -19,12 +19,12 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
  //返回订单
     //List<Order> getOrder(String username);
 
-    List<Order> findByUsername(String username);
+    List<Order> findByAccount(String account);
 
-    @Query(value = "select max(oid) from orders",nativeQuery = true)
+    @Query(value = "select max(id) from orders",nativeQuery = true)
     int maxID();
 
-    Order findBySid(int sid);
+    Order findBySkuId(int skuId);
 
 //    @Query(value = "select * from orders where sid = #{sid}",nativeQuery = true)
 //    Order getSid(int sid);
@@ -32,15 +32,15 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
 //    @Modifying
 //    @Query("update orders count set count = count'+'ll  where u.id = ?2")
 //    Integer updatePasswordById(String password, String id);
-     @Query(value = "select o.count from Order o where o.sid = ?1")
-     int getCount(int sid);
+     @Query(value = "select o.count from Order o where o.skuId = ?1")
+     int getCount(int skuId);
 
 //    @Query("select u from User u where u.sex = ?1")
 //    List<User> findUsersBySex(Integer sex);
 
      @Modifying
-    @Query(value = "update Order o set o.count = ?1 where o.sid= ?2")
-    void updateCount(int count,int sid);
+    @Query(value = "update Order o set o.count = ?1 where o.skuId= ?2")
+    void updateCount(int count,int skuId);
 
 
 

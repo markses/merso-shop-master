@@ -12,17 +12,18 @@ import java.sql.Timestamp;
 public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//解决了表不存在的问题
     @Id
-    @Column(length = 50)
-    private int oid;
-    @Column(length = 255)
-    private String username;
-    @Column(length = 50)
-    private int sid;
-
-    @Column(length = 50)
-    private int count;
+    private int id;
+    @JoinColumn(name = "account")
+    private String account;
+    @JoinColumn(name = "sku_id")
+    private int skuId;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Timestamp data;
+    private Timestamp date;
+    private String color;
+    private String size;
+    private String orderNo;
+    private int count;
+
 
 
 }

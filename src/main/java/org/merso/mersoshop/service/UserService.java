@@ -40,4 +40,11 @@ public class UserService {
         String username = userRepository.getUsername(account);
         return username;
     }
+
+    public String updateUsername(String username,String account){
+
+        userRepository.updateUsername(username,account);
+        return username;
+
+    }
 }

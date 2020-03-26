@@ -1,6 +1,9 @@
 package org.merso.mersoshop.result;
 
 import lombok.Data;
+import org.merso.mersoshop.entity.ShopsSpecValue;
+
+import java.util.List;
 
 /**
  * ResponseData:
@@ -25,6 +28,10 @@ public class ResponseData<T> {
      * 结果对象
      */
     public T data;
+    /**
+     * 规格对象
+     */
+   public List<ShopsSpecValue> shopsSpecValues;
 
     public ResponseData() {
     }
@@ -39,5 +46,12 @@ public class ResponseData<T> {
         this.msg = msg;
         this.data = data;
     }
+
+    public ResponseData(T data,List<ShopsSpecValue> shopsSpecValues){
+        this.data = data;
+        this.shopsSpecValues = shopsSpecValues;
+
+    }
+
 }
 

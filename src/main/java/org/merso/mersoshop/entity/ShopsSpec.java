@@ -14,6 +14,7 @@ import java.util.Set;
 public class ShopsSpec {
         @GeneratedValue(strategy = GenerationType.IDENTITY)//解决了表不存在的问题
         @Id
+        @JsonIgnore
         private int id;
         private String spec_no;
         private String spec_name;

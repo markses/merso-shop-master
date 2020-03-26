@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.merso.mersoshop.entity.LoginState;
 import org.merso.mersoshop.entity.User;
+import org.merso.mersoshop.repository.UserRepository;
 import org.merso.mersoshop.result.ResponseData;
 import org.merso.mersoshop.result.ResponseDataUtil;
 import org.merso.mersoshop.service.EmailService;
@@ -27,6 +28,8 @@ public class UserController {
   private UserService userService;
   @Autowired
   private EmailService emailService;
+  @Autowired
+  private UserRepository userRepository;
 
   //用户注册
   @RequestMapping("/registered")
@@ -124,6 +127,23 @@ public class UserController {
     subject.logout();
     return "logout";
   }
+//修改昵称
+@RequestMapping(value = "/updateAccount",method = RequestMethod.GET)
+@ResponseBody
+public ResponseData updateAccount(@RequestParam("username") String username,@RequestParam("account")String account) {
+    String username1 = userService.updateUsername(username, account);
 
+ ResponseData responseData = new ResponseData();
+ responseData.setMsg("修改成功");
+ responseData.setData(username1);
+ return  responseData;
+}
+
+  @RequestMapping(value = "/updatePassword",method = RequestMethod.GET)
+  @ResponseBody
+  public String updatePassword(@RequestParam("password") String password,@RequestParam("account")String account) {
+   userRepository.updatePassword(password,account);
+   return "修改成功";
+  }
 
 }

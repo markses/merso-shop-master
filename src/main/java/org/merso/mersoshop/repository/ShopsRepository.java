@@ -12,9 +12,19 @@ import java.util.Optional;
 
 @Repository
 public interface ShopsRepository  extends JpaRepository<Shops,Integer> {
-
-    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,category_id from shops_sku where category_id = 4",nativeQuery = true)
+    //获取手机信息
+    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,category_id,sku_url from shops_sku where category_id = 1",nativeQuery = true)
+    List<Shops> getIphones();
+      //获取电脑信息
+    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,category_id,sku_url from shops_sku where category_id = 2",nativeQuery = true)
+    List<Shops> getComputers();
+    //获取衣服信息
+    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,category_id,sku_url from shops_sku where category_id = 3",nativeQuery = true)
     List<Shops> getShops();
+    //获取零食信息
+    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,category_id,sku_url from shops_sku where category_id = 4",nativeQuery = true)
+    List<Shops> getFoods();
     //获取商品详情
     Optional<Shops> findById(Integer id);
+
 }
