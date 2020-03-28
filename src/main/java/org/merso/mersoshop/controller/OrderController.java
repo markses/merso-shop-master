@@ -1,8 +1,10 @@
 package org.merso.mersoshop.controller;
 
 import org.merso.mersoshop.entity.Order;
+import org.merso.mersoshop.entity.OrderModel;
 import org.merso.mersoshop.entity.Orders;
 import org.merso.mersoshop.repository.OrderRepository;
+import org.merso.mersoshop.result.ResponseData;
 import org.merso.mersoshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +42,25 @@ private OrderRepository orderRepository;
         return result;
     }
 
+    @RequestMapping(value = "/getOrders", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData getOrder(@RequestParam("account") String account) {
+System.out.println(account);
+      List<Order> orders = orderRepository.findByAccount(account);
+      ResponseData responseData = new ResponseData();
+      responseData.setData(orders);
+      return responseData;
+    }
+
+    @RequestMapping(value = "/getOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData getOrders(@RequestParam("account") String account) {
+
+      List<OrderModel> orderModels = orderRepository.getOrders(account);
+        ResponseData responseData = new ResponseData();
+        responseData.setData(orderModels);
+        return responseData;
+//        return orderModels;
+    }
 
 }

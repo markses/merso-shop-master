@@ -74,4 +74,14 @@ private ShopsSpecValueRepository shopsSpecValueRepository;
         return responseData;
 
     }
+
+    //获取优惠商品信息
+    @RequestMapping("/getLowShops")
+    public ResponseData getLowShops() {
+        List<Shops> shopsList = shopsRepository.getLowShops();
+        ResponseData responseData = new ResponseData();
+        responseData.setData(shopsList);
+        //return shopsList;
+        return responseData;
+    }
 }

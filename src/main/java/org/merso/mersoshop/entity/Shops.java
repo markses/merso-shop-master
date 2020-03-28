@@ -21,6 +21,7 @@ public class Shops {
     private int stock;
     private String sku_url;
     private Float price;
+    private Float low_price;
 
     @JsonIgnore
     @ManyToOne
