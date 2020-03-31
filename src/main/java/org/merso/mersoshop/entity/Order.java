@@ -23,6 +23,7 @@ public class Order {
     private String size;
     private String orderNo;
     private int count;
+    private int order_status;
 
 
 

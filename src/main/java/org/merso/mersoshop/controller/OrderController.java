@@ -63,4 +63,31 @@ System.out.println(account);
 //        return orderModels;
     }
 
+    @RequestMapping(value = "/deleteOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public String deleteOrders(@RequestParam("order_no") String order_no) {
+        orderRepository.deleteByOrderNo(order_no);
+
+       return "取消成功";
+    }
+    //支付订单
+    @RequestMapping(value = "/PayOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public String PayOrders(@RequestParam("order_no") String order_no) {
+        orderRepository.payOrder(order_no);
+
+        return "支付成功";
+    }
+
+    //获取支付订单
+    @RequestMapping(value = "/getPayOrder", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData getPayOrders(@RequestParam("account") String account) {
+
+        List<OrderModel> orderModels = orderRepository.getPayOrder(account);
+        ResponseData responseData = new ResponseData();
+        responseData.setData(orderModels);
+        return responseData;
+//        return orderModels;
+    }
 }

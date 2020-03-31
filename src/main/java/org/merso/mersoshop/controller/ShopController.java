@@ -84,4 +84,16 @@ private ShopsSpecValueRepository shopsSpecValueRepository;
         //return shopsList;
         return responseData;
     }
+
+    //搜索商品
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData getSearchShops(@RequestParam("name") String name) {
+        List<Shops> shopsList = shopsRepository.findByName(name);
+        ResponseData responseData = new ResponseData();
+        responseData.setCode(300);
+        responseData.setData(shopsList);
+        //return shopsList;
+        return responseData;
+    }
 }

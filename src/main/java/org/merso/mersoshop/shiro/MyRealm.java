@@ -37,7 +37,7 @@ public class MyRealm extends AuthorizingRealm {
 //    }
 
 
-    //用户认证
+    //用户登录认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
