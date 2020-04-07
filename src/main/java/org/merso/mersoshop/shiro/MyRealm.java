@@ -43,6 +43,7 @@ public class MyRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
 
         User user = userRepository.findByAccount(token.getUsername());
+        //Boolean isManager = user.getIsManager();
 
         //验证账户信息
         if (user == null) {

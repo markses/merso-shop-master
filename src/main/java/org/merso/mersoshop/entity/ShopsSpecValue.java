@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name="shops_spec_value")
+@Table(name="shops_sku_shops_spec")
 @Data
 public class ShopsSpecValue {
     @JsonIgnore
@@ -14,8 +14,10 @@ public class ShopsSpecValue {
     @Id
     private int id;
     private  String spec_value;
-    @JsonIgnore
-    @ManyToOne
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "spec_id")
+//    private ShopsSpec shopsSpec;
     @JoinColumn(name = "spec_id")
-    private ShopsSpec shopsSpec;
+    private String specId;
 }

@@ -22,4 +22,5 @@ public class User {
     private String email;
     private String avatar;
     private String code;
+    private Boolean manager;
 }

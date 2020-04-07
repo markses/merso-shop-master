@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.merso.mersoshop.mapper.ShopsMapper">
+
+    <select id="getSize" resultType="org.merso.mersoshop.entity.ShopsSize">
+        SELECT sku.sku_name
+        FROM shops_sku sku,shops_spec spec,shops_sku_spec skp
+        WHERE sku.id = skp.sku_id AND spec.id = skp.spec_id and sku.id = #{id}
+    </select>
+</mapper>

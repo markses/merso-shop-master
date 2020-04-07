@@ -73,6 +73,14 @@ public class UserController {
      *
      */
 
+
+
+  User user1 = userRepository.findByAccount(user.getAccount());
+  //Boolean isManager = user1.getManager();
+
+
+
+
     //1.获取subjec
 
     Subject subject = SecurityUtils.getSubject();
@@ -89,7 +97,11 @@ public class UserController {
      loginState.setIsLogin(false);
      loginState.setAccount(user.getAccount());
      session.setAttribute("loginState",loginState);
-    return ResponseDataUtil.success("登录成功");
+     ResponseData responseData = new ResponseData();
+     responseData.setData(user1);
+      responseData.setMsg("登录成功");
+      responseData.setCode(200);
+    return responseData;
 
     }
     catch (UnknownAccountException e){
@@ -145,5 +157,14 @@ public ResponseData updateAccount(@RequestParam("username") String username,@Req
    userRepository.updatePassword(password,account);
    return "修改成功";
   }
+
+  @RequestMapping(value = "/get")
+  @ResponseBody
+  public ResponseData getUser() {
+    ResponseData responseData = new ResponseData();
+    responseData.setData(userRepository.findAll());
+    return responseData;
+  }
+
 
 }

@@ -26,3 +26,7 @@ spring:
         enable: true
         required: true
   logging.level.org.springframework.boot.autoconfigure: ERROR
+
+
+  mybatis:
+    mapper-locations: classpath:mapping/*.xml

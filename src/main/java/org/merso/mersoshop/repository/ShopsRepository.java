@@ -3,10 +3,13 @@ package org.merso.mersoshop.repository;
 import lombok.Data;
 import org.merso.mersoshop.entity.Shops;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -40,5 +43,18 @@ public interface ShopsRepository  extends JpaRepository<Shops,Integer> {
     //搜索商品
     @Query("select s from Shops s where s.sku_details like concat('%',?1,'%') ")
     List<Shops> findByName(String name);
+
+    //商品上架状态
+    @Modifying
+    @Transactional
+    @Query(value = "update Shops s set s.is_put = ?2 where s.sku_no = ?1")
+    void updatePublishStatus(String sku_no,Boolean is_put);
+
+
+    //删除商品
+    @Modifying
+    @Transactional
+    @Query(value = "delete from Shops  s where s.sku_no = ?1")
+    void DeleteShops(String sku_no);
 
 }

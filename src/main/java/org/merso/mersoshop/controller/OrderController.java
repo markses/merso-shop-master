@@ -90,4 +90,15 @@ System.out.println(account);
         return responseData;
 //        return orderModels;
     }
+    //获取所有订单
+    @RequestMapping(value = "/get")
+    @ResponseBody
+    public ResponseData getAllOrders() {
+
+
+        ResponseData responseData = new ResponseData();
+        responseData.setData(orderRepository.findAll());
+        return responseData;
+
+    }
 }
