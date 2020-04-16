@@ -26,17 +26,17 @@ public class ShopsService {
       return shopsSize;
     }
 
-//    public ResponseData getShopList(){
-//        PageRequest pageRequest = PageRequest.of(0,10);
-//       Page<Shops> shopsPage = shopsRepository.findAll(pageRequest);
-//       List<Shops> shopsList = shopsPage.getContent();
-//
-//       int size = shopsPage.getTotalPages();
-//        ResponseData responseData = new ResponseData();
-//        responseData.setData(shopsList);
-//        responseData.setCode(size);
-////       System.out.println(size);
-////        return shopsList;
-//        return responseData;
-//    }
+    // 后台添加商品
+    public String ReqAddShops(Shops shops){
+        Shops shops1 = shopsRepository.findSkuShops(shops.getSku_no());
+        if(shops1 == null){
+
+            shopsRepository.save(shops);
+            return "添加商品成功";
+
+        } else{
+            return "请勿重复添加商品";
+        }
+
+    }
 }

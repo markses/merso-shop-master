@@ -3,6 +3,7 @@ package org.merso.mersoshop.controller;
 import org.merso.mersoshop.entity.Order;
 import org.merso.mersoshop.entity.OrderModel;
 import org.merso.mersoshop.entity.Orders;
+import org.merso.mersoshop.entity.SendOrderModel;
 import org.merso.mersoshop.repository.OrderRepository;
 import org.merso.mersoshop.result.ResponseData;
 import org.merso.mersoshop.service.OrderService;
@@ -98,6 +99,62 @@ System.out.println(account);
 
         ResponseData responseData = new ResponseData();
         responseData.setData(orderRepository.findAll());
+        return responseData;
+
+    }
+
+    //删除订单
+    @RequestMapping(value = "/handleDeleteOrders")
+    @ResponseBody
+    public ResponseData handleDeleteOrders(@RequestParam("orderNo") String orderNo) {
+
+
+        ResponseData responseData = new ResponseData();
+        orderRepository.DeleteOrders(orderNo);
+        responseData.setMsg("删除成功");
+        return responseData;
+
+    }
+
+    //支付订单
+    @RequestMapping(value = "/payMentOrder")
+    @ResponseBody
+    public ResponseData payMentOrder(@RequestParam("orderNo") String orderNo,@RequestParam("info_id") int info_no) {
+
+
+        ResponseData responseData = new ResponseData();
+        orderRepository.paymentOrders(info_no,orderNo);
+        responseData.setMsg("确认支付成功");
+        return responseData;
+
+    }
+//后台订单查询
+    @RequestMapping(value = "/sendPayOrder")
+    @ResponseBody
+    public ResponseData sendPayOrder (@RequestParam("orderNo") String orderNo) {
+
+         List<SendOrderModel> sendOrderModels = orderRepository.getSendOrderModel(orderNo);
+
+        ResponseData responseData = new ResponseData();
+   responseData.setData(sendOrderModels);
+        responseData.setMsg("获取成功");
+
+        return responseData;
+
+    }
+
+
+    //发送订单状态更新
+    @RequestMapping(value = "/updateSendOrder",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData updateSendOrder(@RequestParam("orderNo") String orderNo) {
+
+
+
+        ResponseData responseData = new ResponseData();
+orderRepository.updateSeOrder(orderNo);
+        responseData.setMsg("更新成功");
+
         return responseData;
 
     }

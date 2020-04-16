@@ -9,6 +9,7 @@ import java.util.Map;
 
 public interface ShopsSpecRepository extends JpaRepository<ShopsSpec,Integer> {
 
+
 //        @Query(value = "select sv.spec_value,sv.id,sv.shopsSpec from ShopsSpec spe,Shops s,ShopsSkuSpec spec,ShopsSpecValue sv" +
 //        " where sku.id =  spec.skuId and spec.specId = spe.id " +
 //        " and sv.specId = spe.id and sku.id = ?1")

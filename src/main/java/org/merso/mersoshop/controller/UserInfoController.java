@@ -4,10 +4,7 @@ import org.merso.mersoshop.entity.UserInfo;
 import org.merso.mersoshop.repository.UserInfoRepository;
 import org.merso.mersoshop.result.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/userInfo")
@@ -22,6 +19,23 @@ public class UserInfoController {
         userInfoRepository.save(userInfo);
         ResponseData responseData = new ResponseData();
         responseData.setMsg("okk");
+        return responseData;
+    }
+
+    @RequestMapping("/getInfo")
+    @ResponseBody
+    public ResponseData getInfo(@RequestParam("account") String account) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(userInfoRepository.findAllByAccount(account));
+        return responseData;
+    }
+
+    @RequestMapping("/deleteInfo")
+    @ResponseBody
+    public ResponseData deleteInfo(@RequestParam("id") int id) {
+        ResponseData responseData = new ResponseData();
+        userInfoRepository.deleteById(id);
+        responseData.setMsg("删除成功");
         return responseData;
     }
 }

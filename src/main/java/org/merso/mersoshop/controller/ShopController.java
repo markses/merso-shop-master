@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.ibatis.annotations.Param;
 import org.merso.mersoshop.entity.Shops;
 
+import org.merso.mersoshop.entity.ShopsModel;
 import org.merso.mersoshop.entity.ShopsSpecValue;
 import org.merso.mersoshop.repository.ShopsRepository;
 
@@ -29,7 +30,7 @@ private ShopsService shopsService;
     //获取手机
     @RequestMapping("/getiphones")
     public ResponseData getshops() {
-        List<Shops> shopsList =  shopsRepository.getIphones();
+        List<ShopsModel> shopsList =  shopsRepository.getIphones();
         ResponseData responseData = new ResponseData();
         responseData.setData(shopsList);
         //return shopsList;
@@ -53,7 +54,7 @@ private ShopsService shopsService;
   //获取电脑信息 getcomputers
   @RequestMapping("/getcomputers")
   public ResponseData getComputer() {
-      List<Shops> shopsList =  shopsRepository.getComputers();
+      List<ShopsModel> shopsList =  shopsRepository.getComputers();
       ResponseData responseData = new ResponseData();
       responseData.setData(shopsList);
       //return shopsList;
@@ -64,7 +65,7 @@ private ShopsService shopsService;
   //获取衣服信息
   @RequestMapping("/getshops")
   public ResponseData getShops() {
-      List<Shops> shopsList =  shopsRepository.getShops();
+      List<ShopsModel> shopsList =  shopsRepository.getShops();
       ResponseData responseData = new ResponseData();
       responseData.setData(shopsList);
       //return shopsList;
@@ -73,7 +74,7 @@ private ShopsService shopsService;
   }
     @RequestMapping("/getfoods")
     public ResponseData getFoods() {
-        List<Shops> shopsList =  shopsRepository.getFoods();
+        List<ShopsModel> shopsList =  shopsRepository.getFoods();
         ResponseData responseData = new ResponseData();
         responseData.setData(shopsList);
         //return shopsList;
@@ -84,7 +85,7 @@ private ShopsService shopsService;
     //获取优惠商品信息
     @RequestMapping("/getLowShops")
     public ResponseData getLowShops() {
-        List<Shops> shopsList = shopsRepository.getLowShops();
+        List<ShopsModel> shopsList = shopsRepository.getLowShops();
         ResponseData responseData = new ResponseData();
         responseData.setData(shopsList);
         //return shopsList;
@@ -131,5 +132,26 @@ private ShopsService shopsService;
         shopsRepository.DeleteShops(sku_no);
         responseData.setMsg("删除成功");
         return responseData;
+    }
+
+
+    //添加商品
+    @RequestMapping(value = "addShops")
+    @ResponseBody
+    public ResponseData reqAddShops(@RequestBody Shops shops) {
+ResponseData responseData = new ResponseData();
+responseData.setMsg(shopsService.ReqAddShops(shops));
+       return responseData;
+
+    }
+
+    //编辑商品
+    @RequestMapping(value = "handleSelectShops",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData handleSelectShops(@RequestParam String sku_no) {
+        ResponseData responseData = new ResponseData();
+        responseData.setData(shopsRepository.findSkuShops(sku_no));
+        return responseData;
+
     }
 }

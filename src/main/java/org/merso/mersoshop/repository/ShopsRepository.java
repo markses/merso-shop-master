@@ -1,7 +1,9 @@
 package org.merso.mersoshop.repository;
 
 import lombok.Data;
+import org.merso.mersoshop.entity.OrderModel;
 import org.merso.mersoshop.entity.Shops;
+import org.merso.mersoshop.entity.ShopsModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -16,29 +18,35 @@ import java.util.Optional;
 @Repository
 public interface ShopsRepository  extends JpaRepository<Shops,Integer> {
     //获取手机信息
-    @Query(value = "select stock,sku_details,sku_name,low_price,id,price,sku_no,category_id," +
-            "sku_url from shops_sku where category_id = 1",nativeQuery = true)
-    List<Shops> getIphones();
+    @Query(value = "select new org.merso.mersoshop.entity.ShopsModel(id,sku_no," +
+            "sku_name,sku_details,stock,sku_url,price,low_price)" +
+            " from Shops  s where s.category_id = 1")
+    List<ShopsModel> getIphones();
+
       //获取电脑信息
-    @Query(value = "select stock,sku_details,sku_name,id,price,low_price,sku_no,category_id," +
-            "sku_url from shops_sku where category_id = 2",nativeQuery = true)
-    List<Shops> getComputers();
+      @Query(value = "select new org.merso.mersoshop.entity.ShopsModel(id,sku_no," +
+              "sku_name,sku_details,stock,sku_url,price,low_price)" +
+              " from Shops  s where s.category_id = 2")
+    List<ShopsModel> getComputers();
     //获取衣服信息
-    @Query(value = "select stock,sku_details,sku_name,id,price,low_price,sku_no," +
-            "category_id,sku_url from shops_sku where category_id = 3",nativeQuery = true)
-    List<Shops> getShops();
+    @Query(value = "select new org.merso.mersoshop.entity.ShopsModel(id,sku_no," +
+            "sku_name,sku_details,stock,sku_url,price,low_price)" +
+            " from Shops  s where s.category_id = 3")
+    List<ShopsModel> getShops();
     //获取零食信息
-    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,low_price," +
-            "category_id,sku_url from shops_sku where category_id = 4",nativeQuery = true)
-    List<Shops> getFoods();
+    @Query(value = "select new org.merso.mersoshop.entity.ShopsModel(id,sku_no," +
+            "sku_name,sku_details,stock,sku_url,price,low_price)" +
+            " from Shops  s where s.category_id = 4")
+    List<ShopsModel> getFoods();
     //获取商品详情
 
     Optional<Shops> findById(Integer id);
 
     //获取优惠商品信息
-    @Query(value = "select stock,sku_details,sku_name,id,price,sku_no,low_price," +
-            "category_id,sku_url from shops_sku where category_id = 5",nativeQuery = true)
-    List<Shops> getLowShops();
+    @Query(value = "select new org.merso.mersoshop.entity.ShopsModel(id,sku_no," +
+            "sku_name,sku_details,stock,sku_url,price,low_price)" +
+            " from Shops  s where s.category_id = 5")
+    List<ShopsModel> getLowShops();
 
     //搜索商品
     @Query("select s from Shops s where s.sku_details like concat('%',?1,'%') ")
@@ -57,4 +65,8 @@ public interface ShopsRepository  extends JpaRepository<Shops,Integer> {
     @Query(value = "delete from Shops  s where s.sku_no = ?1")
     void DeleteShops(String sku_no);
 
+
+    //添加后台商品
+    @Query(value = "select s from Shops s where s.sku_no = ?1")
+    Shops findSkuShops(String sku_no);
 }

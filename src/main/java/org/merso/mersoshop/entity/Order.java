@@ -17,6 +17,8 @@ public class Order {
     private String account;
     @JoinColumn(name = "sku_id")
     private int skuId;
+    @JoinColumn(name = "info_id")
+    private int info_id;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp date;
     private String color;
@@ -24,6 +26,8 @@ public class Order {
     private String orderNo;
     private int count;
     private int order_status;
+    private int send_status;
+    private float money;
 
 
 

@@ -24,14 +24,19 @@ public class Shops implements Serializable{
     private String sku_details;
     private int stock;
     private String sku_url;
+
+
+
     private Float price;
     private Float low_price;
     private Boolean is_put;
-    private Boolean isprefer;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "category_id") //(cascade=CascadeType.ALL)//People是关系的维护端
-    private ShopsCategory shopsCategory;
+    private Boolean is_prefer;
+    @JoinColumn(name = "category_id")
+    private int category_id;
+//    @JsonIgnore
+//    @ManyToOne
+//    @JoinColumn(name = "category_id") //(cascade=CascadeType.ALL)//People是关系的维护端
+//    private ShopsCategory shopsCategory;
 
 //    @JsonIgnore //忽略不传给前台的属性
 //    @ManyToMany
@@ -39,8 +44,6 @@ public class Shops implements Serializable{
 //            joinColumns = @JoinColumn(name = "sku_id",referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "spec_id", referencedColumnName = "id"))
 //    private List<ShopsSpec> shopsSpecs;
-
-
 
     @Override
     public String toString() {
@@ -53,7 +56,9 @@ public class Shops implements Serializable{
                 ", sku_url='" + sku_url + '\'' +
                 ", price=" + price +
                 ", low_price=" + low_price +
-                ", shopsCategory=" + shopsCategory +
+                ", is_put=" + is_put +
+                ", is_prefer=" + is_prefer +
+                ", category_id=" + category_id +
                 '}';
     }
 

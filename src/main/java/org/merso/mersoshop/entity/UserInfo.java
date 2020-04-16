@@ -12,18 +12,14 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String province;
     private String address;
-    private String city;
-    private String sex;
-    private String delivery;
+    private int postal_code;
     private int iphone;
-    private String date;
 //    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account")
     private String account;
 
-    public UserInfo(){
-        super();
-    }
+//    public UserInfo(){
+//        super();
+//    }
 }
