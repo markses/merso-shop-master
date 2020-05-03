@@ -29,7 +29,7 @@
 
 项目演示地址：敬请期待......
 
-![前台商城系统功能演示.gif](/document/resource/mall-admin.gif)
+![前台商城系统功能演示.gif](/Study-notes/blob/master/img/%E5%95%86%E5%9F%8E%E7%B3%BB%E7%BB%9F2.gif)
 
 #### 后台管理系统
 
